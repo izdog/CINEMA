@@ -83,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `cinema`.`genre_assoc` (
   `genre_id` INT(10) UNSIGNED NOT NULL,
   `films_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`genre_id`, `films_id`),
-  INDEX `fk_genre_has_films_films1_idx` (`films_id` ASC) VISIBLE,
-  INDEX `fk_genre_has_films_genre1_idx` (`genre_id` ASC) VISIBLE,
+  INDEX `fk_genre_has_films_films1_idx` (`films_id` ASC),
+  INDEX `fk_genre_has_films_genre1_idx` (`genre_id` ASC),
   CONSTRAINT `fk_genre_has_films_films1`
     FOREIGN KEY (`films_id`)
     REFERENCES `cinema`.`films` (`id`)
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `cinema`.`play` (
   `people_id` INT(10) UNSIGNED NOT NULL,
   `personnage` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`films_id`, `people_id`),
-  INDEX `fk_films_has_people_people1_idx` (`people_id` ASC) VISIBLE,
-  INDEX `fk_films_has_people_films_idx` (`films_id` ASC) VISIBLE,
+  INDEX `fk_films_has_people_people1_idx` (`people_id` ASC),
+  INDEX `fk_films_has_people_films_idx` (`films_id` ASC),
   CONSTRAINT `fk_films_has_people_films`
     FOREIGN KEY (`films_id`)
     REFERENCES `cinema`.`films` (`id`)
