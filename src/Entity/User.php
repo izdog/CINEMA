@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use App\Model\UserModel;
 class User {
 
     public $id;
@@ -14,19 +15,7 @@ class User {
     }
 
     private function getFilms(){
-        $pdo = \App\App::getPDO();
-        $stmt = 'SELECT people.prenom AS director_pre, people.nom AS director_nom, films.titre, films.synopsis, films.date_sortie, films.id
-        FROM user 
-        INNER JOIN whishlist ON user.id = whishlist.user_id
-        INNER JOIN films ON whishlist.films_id = films.id
-        INNER JOIN people ON films.realisateur_id = people.id
-        WHERE user.id = :id;';
-        $req = $pdo->prepare($stmt);
-        $req->bindParam(':id', $this->id);
-        $req->execute();
-
-        return $req->fetchAll(\PDO::FETCH_ASSOC);
-
+        return UserModel::getWhishes($this->id);
     }
 
 

@@ -14,9 +14,6 @@ class Auth {
 
         if($user){
             if(password_verify($password, $user->password)){
-                if(session_status() === PHP_SESSION_NONE){
-                    session_start();
-                }
                 $_SESSION['auth'] = $user->id;
                 return $user;
             }

@@ -1,17 +1,24 @@
-<form action="" method="POST">
-    <div>
+    <div class="uk-container uk-height-medium uk-flex uk-flex-center uk-flex-middle">
+    <form action="" method="POST">
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input" type="text" name="username">
+            </div>
+        </div>
         <?php if(isset($errors['username'])):?>
-            <p><?= $errors['username']?></p>
+            <div class="uk-alert uk-alert-danger"><?= $errors['username']?></div>
         <?php endif; ?>
-        <label for="username">Username :</label>
-        <input type="text" name="username" id="username">
-    </div>
-    <div>
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input class="uk-input" type="text" name="password">
+            </div>
+        </div>
         <?php if(isset($errors['password'])):?>
-            <p><?= $errors['password']?></p>
+                <div class="uk-alert uk-alert-danger"><?= $errors['password']?></div>
         <?php endif; ?>
-        <label for="password">Password :</label>
-        <input type="password" name="password" id="password">
+        <button class="uk-button uk-button-primary">Log in</button>
+    </form>
     </div>
-    <button type="submit">Log in</button>
-</form>
+    
