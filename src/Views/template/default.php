@@ -9,28 +9,30 @@
 </head>
 <body>
 <!-- NAV START -->
-<nav class=" uk-light uk-background-secondary uk-navbar-transparent uk-navbar-container uk-margin" uk-navbar="mode: click">
-    <div class="uk-navbar-right">
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <nav class="uk-background-secondary uk-navbar-transparent uk-navbar-container" uk-navbar="mode: click">
+        <div class="uk-navbar-right">
 
-        <ul class="uk-navbar-nav">
-            <li class="uk-active"><a href="">Accueil</a></li>
-            <li><a href="films">Films</a></li>
-            <?php if(isset($_SESSION['auth'])):?>
-                <li><a href="" uk-icon="icon: user"></a></li>
-            <?php endif; ?>
-            <?php if(!isset($_SESSION['auth'])): ?>
-                <li><a href="#">Sign in</a></li>
-            <?php endif; ?>
-            <?php if(!isset($_SESSION['auth'])): ?>
-                <li><a href="#">Sign out</a></li>
-            <?php endif; ?>
-            <?php if(isset($_SESSION['auth'])): ?>
-                <li><a href="logout" uk-icon="icon: sign-out"></a></li>
-            <?php endif; ?>
-        </ul>
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="accueil">Accueil</a></li>
+                <li><a href="films">Films</a></li>
+                <?php if(isset($_SESSION['auth'])):?>
+                    <li><a href="profil" uk-icon="icon: user"></a></li>
+                <?php endif; ?>
+                <?php if(!isset($_SESSION['auth'])): ?>
+                    <li><a href="login">Se connecter</a></li>
+                <?php endif; ?>
+                <?php if(!isset($_SESSION['auth'])): ?>
+                    <li><a href="#">S'inscire</a></li>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['auth'])): ?>
+                    <li><a href="logout" uk-icon="icon: sign-out"></a></li>
+                <?php endif; ?>
+            </ul>
 
-    </div>
-</nav>
+        </div>
+    </nav>
+</div>
 <!-- NAV END -->
 <section>
         <?= $content ?>

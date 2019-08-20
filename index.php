@@ -14,16 +14,13 @@ $router->before('GET', '/profil', function(){
     }
 });
 
-$router->get('/', function(){
-    echo "HomePage !";
-    $auth = new App\Auth();
-    // dump($auth->login('rambo', 'rambo123'));
-});
-
+$router->get('/', 'App\Controller\FilmController@home');
+$router->get('/accueil', 'App\Controller\FilmController@home');
 $router->get('/login', '\App\Controller\AuthController@show');
 $router->post('/login', '\App\Controller\AuthController@login');
 $router->get('/logout', '\App\Controller\AuthController@logout');
 $router->get('/profil', '\App\Controller\UserController@profile');
+$router->get('/films', '\App\Controller\FilmController@films');
 
 $router->run();
 
