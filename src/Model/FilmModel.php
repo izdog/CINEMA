@@ -17,11 +17,33 @@ class FilmModel {
         $req->execute();
         
         return $req->fetchAll(\PDO::FETCH_CLASS, '\App\Entity\Film');
-
     }
 
     public static function getFilmsByGenre(){
 
+    }
+
+    public static function getNbFilms(){
+        $stmt = 'SELECT COUNT(films.id) AS nbFilms FROM films';
+        $req = \App\App::getPDO()->query($stmt);
+
+        $nbFilms = $req->fetch(\PDO::FETCH_ASSOC);
+
+        return $nbFilms['nbFilms'];
+    }
+
+    public static function getFilmsForPagination(int $offset, int $limit){
+        $stmt = 'SELECT films.titre, films.id 
+        FROM films LIMIT :limit OFFSET :offset';
+       
+        $req = \App\App::getPDO()->prepare($stmt);
+
+        $req->bindParam('limit', $limit, \PDO::PARAM_INT);
+        $req->bindParam('offset', $offset, \PDO::PARAM_INT);
+
+        $req->execute();
+
+        return $req->fetchAll(\PDO::FETCH_CLASS, '\App\Entity\Film');
     }
 
     public static function getGenresByFilm(int $filmId){

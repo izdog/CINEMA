@@ -10,8 +10,7 @@ class AuthController extends Controller {
         if(!isset($_SESSION['auth'])){
             $this->render('login');
         } else {
-            header('Location: profil');
-            exit();
+            $this->redirect('profil');
         }
         
     }
@@ -27,11 +26,9 @@ class AuthController extends Controller {
             $user = $auth->login($_POST['username'], $_POST['password']);
         
             if($user){
-                header('Location: profil');
-                exit();
+                $this->redirect('profil');
             } else {
-                header('Location: login');
-                exit();
+                $this->redirect('login');
             }
         }
 
@@ -41,8 +38,7 @@ class AuthController extends Controller {
         if(isset($_SESSION['auth'])){
             session_start();
             session_destroy();
-            header('Location: login');
-            exit();
+            $this->redirect('login');
         }
     }
 

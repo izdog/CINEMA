@@ -3,6 +3,7 @@ session_start();
 require 'vendor/autoload.php';
 
 define('ROOT', __DIR__);
+define('PATH_URL', '/COURS_PHP/CINEMA');
 
 $router = new \Bramus\Router\Router();
 
@@ -21,6 +22,7 @@ $router->post('/login', '\App\Controller\AuthController@login');
 $router->get('/logout', '\App\Controller\AuthController@logout');
 $router->get('/profil', '\App\Controller\UserController@profile');
 $router->get('/films', '\App\Controller\FilmController@films');
+$router->get('/films/page/(\d+)', '\App\Controller\FilmController@films');
 
 $router->run();
 

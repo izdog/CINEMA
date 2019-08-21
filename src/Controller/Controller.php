@@ -13,4 +13,10 @@ class Controller {
         $content = ob_get_clean();
         require self::TEMPLATE_PATH;
     }
+
+    public function redirect(string $view){
+        $location = 'Location: '.PATH_URL.'/'.$view;
+        header($location);
+        exit();
+    }
 }
