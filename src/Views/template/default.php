@@ -15,7 +15,7 @@
 
             <ul class="uk-navbar-nav">
                 <li class="uk-active"><a href="accueil">Accueil</a></li>
-                <li><a href="films">Films</a></li>
+                <li><a href="<?= PATH_URL ?>/films">Films</a></li>
                 <?php if(isset($_SESSION['auth'])):?>
                     <li><a href="<?= PATH_URL ?>/profil" uk-icon="icon: user"></a></li>
                 <?php endif; ?>
@@ -34,10 +34,11 @@
     </nav>
 </div>
 <!-- NAV END -->
+
 <section>
         <?= $content ?>
 </section>
-<footer></footer>
+
 <script src="<?= PATH_URL ?>/node_modules/uikit/dist/js/uikit.min.js"></script>
 <script src="<?= PATH_URL ?>/node_modules/uikit/dist/js/uikit-icons.min.js"></script>
 </body>

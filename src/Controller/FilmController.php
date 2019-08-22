@@ -12,6 +12,13 @@ class FilmController extends Controller {
         $this->render('home');
     }
 
+    public function show(int $id){
+        $film = FilmModel::getFilmById($id);
+        $genres = FilmModel::getGenres();
+
+        $this->render('film', compact('film', 'genres'));
+    }
+
     public function films(int $page = 1){
         $nbPages = ceil(FilmModel::getNbFilms() / self::LIMIT_FILM);
 

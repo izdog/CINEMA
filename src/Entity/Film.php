@@ -13,10 +13,12 @@ class Film {
     public $realisateur_nom;
     public $realisateur_id;
     public $genres = [];
+    public $actors = [];
 
     public function __construct(){
         $this->genres = FilmModel::getGenresByFilm($this->id);
         $this->titre = $this->titreTransform();
+        $this->actors = FilmModel::getActors($this->id);
     }
 
     public function getRealisateur(){

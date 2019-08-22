@@ -1,47 +1,43 @@
 <div uk-grid>
     <!-- FILM FIELD -->
     <div class="uk-width-expand uk-margin">
-        <div class="uk-padding uk-margin-left">
-            <h1>Nos films</h1>
-            <div>
-                <div uk-grid class="uk-child-width-1-3 uk-grid-large">
-
-                
-                <?php foreach($films as $film): ?>
-                    <div>
-                        <div class="uk-card uk-card-default">
-                            <div class="uk-card-body">
-                                <h3 class="uk-card-title"><?= $film->titre ?></h3>
-                                <dl class="uk-description-list">
-                                    <dt>Genres</dt>
-                                    <dd><?= $film->displayGenres()?></dd>
-                                </dl>
-                            </div>
-                            <div class="uk-card-footer">
-                                <div class="uk-flex uk-flex-between">
-                                    <a href="<?= PATH_URL ?>/film/<?=$film->id?>" class="uk-button uk-button-text uk-margin-left"><span uk-icon="icon: search"></span> Read more</a>
-                                    <a href="<?= PATH_URL ?>/film/addWhishlist/<?= $film->id?>" class="uk-button uk-button-text uk-margin-right"><span uk-icon="icon: heart"></span> Whishlist</a>
-                                </div>
-                            </div>
+    <section class="uk-section uk-padding uk-margin-left uk-section-primary uk-preserve-color">
+        <div class="container">
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h1 class="uk-heading-line"><span><?= strtoupper($film->titre)?><span></h1>
+                    <div class="uk-flex">
+                        <div>
+                            <h3 class="uk-margin-remove">GENRES</h3>
+                            <p class="uk-margin-remove"><?= $film->displayGenres()?></p>
                         </div>
-                    </div> 
-                <?php endforeach; ?>
-
+                        <div class="uk-margin-left">
+                            <h3 class="uk-margin-remove">REALISATEUR</h3>
+                            <p class="uk-margin-remove"><?= $film->getRealisateur()?></p>
+                        </div>
+                        <div class="uk-margin-left">
+                            <h3 class="uk-margin-remove">ANNEE</h3>
+                            <p class="uk-margin-remove"><?= $film->getDateFormat()?></p>
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <h3 class="uk-margin-remove">ACTORS</h3>
+                        <div class="uk-flex uk-flex-wrap uk-flex-between">
+                            <?php foreach($film->actors as $actors):?>
+                                <div class="uk-flex uk-flex-column">
+                                    <h4 class="uk-margin-remove"><?= $actors['prenom'].' '.$actors['nom'] ?></h4>
+                                    <img class="uk-text-center" style="border-radius: 50%; margin: 15px auto" data-src="https://placeimg.com/100/100/people" width="75" height="75" alt="" uk-img>
+                                    <p class="uk-text-center uk-margin-remove"><?= $actors['personnage']?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <p><?= $film->synopsis?></p>
                 </div>
-            </div>
+            
         </div>
-        <ul class="uk-pagination uk-flex-center" uk-margin>
-                <li <?= (($page - 1) < 1) ? 'class="uk-disabled"' : null ?>><a href="<?= (($page - 1) >= 1) ? PATH_URL.'/films/page/'.($page - 1) : PATH_URL.'/films'; ?>"><span uk-pagination-previous></span></a></li>
-                <?php for($i = 1; $i <= $nbPages; $i++): ?>
-                    <li <?= ($page === $i) ? 'class="uk-active"' : null ?>><a href="<?= PATH_URL ?>/films/page/<?= $i?>"><?= $i?></a></li>
-                <?php endfor;?>
-                <li <?= (($page + 1) > $nbPages) ? 'class="uk-disabled"' : null ?>><a href="<?= (($page + 1) <= $nbPages) ? PATH_URL.'/films/page/'.($page + 1) : PATH_URL.'/films'; ?>"><span uk-pagination-next></span></a></li>
-        </ul>
-
+    </section>
+        
     </div>
-    <!-- END FILM FIELD -->
-
-    <!-- ASIDE FIELD -->
     <div class="uk-width-large ">
         <div class="uk-padding uk-light uk-background-secondary">
         <h1>Nos nouveautés</h1>
@@ -79,6 +75,4 @@
         </form>   
         </div>     
     </div>
-    <!-- END ASIDE FIELD -->
-
 </div>

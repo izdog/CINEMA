@@ -4,8 +4,15 @@ namespace App\Model;
 
 class FilmModel {
 
-    public static function getFilmById(){
+    public static function getFilmById(int $id){
+        $stmt = 'SELECT people.prenom AS realisateur_pre, people.nom AS realisateur_nom, films.titre, films.synopsis, films.date_sortie, films.id, realisateur_id FROM films
+        INNER JOIN people ON films.realisateur_id = people.id
+        WHERE films.id = :id';
 
+        $req = \App\App::getPDO()->prepare($stmt);
+        $req->execute(['id' => $id]);
+        
+        return $req->fetchObject('\App\Entity\Film');
     }
 
     public static function getFilms(){
@@ -57,6 +64,18 @@ class FilmModel {
         $req = \App\App::getPDO()->prepare($stmt);
         $req->execute(['film_id' => $filmId]);
 
+        return $req->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getActors(int $id){
+        $stmt = 'SELECT play.personnage, people.prenom, people.nom 
+        FROM play 
+        INNER JOIN people ON play.people_id = people.id 
+        WHERE play.films_id = :id';
+
+        $req = \App\App::getPDO()->prepare($stmt);
+        $req->execute(['id' => $id]);
+        
         return $req->fetchAll(\PDO::FETCH_ASSOC);
     }
 
